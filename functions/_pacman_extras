@@ -1,0 +1,42 @@
+#compdef pqoc pqlx pqlm pqlmg pacopen
+
+typeset -A opt_args
+
+_pacman_wrapper() {
+  service=pacman \
+    words=(pacman "$@" "${words[@]:1}") \
+    CURRENT=$((CURRENT + 1)) \
+    _pacman
+}
+
+_pqlmg() {
+  if [[ $CURRENT -le 2 ]]; then
+    _message "Pattern"
+  else
+    _pacman_wrapper -Ql
+  fi
+}
+
+_pacman_extras() {
+	case "$service" in
+    pqoc)
+			_command
+			;;
+		pqlx|pqlm)
+			_pacman_wrapper -Ql
+			;;
+    pacopen)
+      _pacman_wrapper -Si
+      ;;
+    pqlmg)
+      _pqlmg
+      ;;
+		*)
+			_message "Error"
+			;;
+	esac
+}
+
+_pacman_extras "$@"
+
+# vim:set ft=zsh:
