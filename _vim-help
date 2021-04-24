@@ -1,0 +1,34 @@
+#compdef vim-help nvim-help
+# Author: Maddison Hellstrom <github.com/b0o>
+# License: MIT License
+
+_vim-help() {
+  local filter="${1:-}"
+
+  local vim_cmd=""
+  case "$service" in
+  vim-help)
+    vim_cmd="vim"
+    ;;
+  nvim-help)
+    vim_cmd="nvim"
+    ;;
+  default)
+    return 1
+    ;;
+  esac
+
+  local -a tagfiles=()
+  while read -r d; do
+    local t="$d/doc/tags"
+    if [[ -f "$t" ]]; then
+      tagfiles+=("$t")
+    fi
+  done <<< "$(command "$vim_cmd" -nesc 'verbose echo &runtimepath . "\n" | q' 2>&1 | tr ',' '\n')"
+
+  compadd -- $(
+    cut -f1 "${tagfiles[@]}" | grep -- "$filter" | sort -u
+  )
+}
+
+# vim:set ft=zsh:

@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+# Author: Maddison Hellstrom <github.com/b0o>
+# License: MIT License
+
+# nvim help
+function nvim-help() {
+  command nvim -c ":h $1 | on${2:+$(printf ' | tab h %s' "${@:2}")}"
+}
