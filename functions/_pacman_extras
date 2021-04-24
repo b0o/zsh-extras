@@ -18,23 +18,23 @@ _pqlmg() {
 }
 
 _pacman_extras() {
-	case "$service" in
+  case "$service" in
     pqoc)
-			_command
-			;;
-		pqlx|pqlm)
-			_pacman_wrapper -Ql
-			;;
+      _command
+      ;;
+    pqlx|pqlm)
+      _pacman_wrapper -Ql
+      ;;
     pacopen)
       _pacman_wrapper -Si
       ;;
     pqlmg)
       _pqlmg
       ;;
-		*)
-			_message "Error"
-			;;
-	esac
+    *)
+      _message "Error"
+      ;;
+  esac
 }
 
 _pacman_extras "$@"
