@@ -4,10 +4,10 @@
 
 https://user-images.githubusercontent.com/21299126/115955030-142f3b00-a4a9-11eb-9595-4d940e7f2adf.mp4
 
-The [`vim-help`](/b0o/zsh-extras/blob/main/functions/vim-help) and [`nvim-help`](/b0o/zsh-extras/blob/main/functions/nvim-help) 
+The [`vim-help`](/functions/vim-help) and [`nvim-help`](/functions/nvim-help) 
 zsh functions launch {,neo}vim directly from the shell into the help view for the given help tags, one per tab.
 
-The [`_vim-help`](/b0o/zsh-extras/blob/main/functions/_vim-help) file adds completions for the {,n}vim-help 
+The [`_vim-help`](/functions/_vim-help) file adds completions for the {,n}vim-help 
 functions for all vim help tags found on your system.
 
 To install, place all three scripts inside a directory in your `fpath`, for example `/usr/share/zsh/site-functions/`.
