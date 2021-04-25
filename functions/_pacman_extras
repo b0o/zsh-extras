@@ -5,7 +5,7 @@ typeset -A opt_args
 _pacman_wrapper() {
   service=pacman \
     words=(pacman "$@" "${words[@]:1}") \
-    CURRENT=$((CURRENT + 1)) \
+    CURRENT=$((CURRENT + #)) \
     _pacman
 }
 
