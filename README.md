@@ -92,7 +92,7 @@ $ git clone git://github.com/b0o/zsh-extras.git
 Include the directory in your `$fpath`, for example by adding in `zshrc`:
 
 ```zsh
-fpath=('path/to/zsh-extras/functions' "${fpath[@]}")
+fpath+=("path/to/zsh-extras/functions")
 ```
 
 You may have to force rebuild `zcompdump`:
