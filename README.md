@@ -27,10 +27,11 @@ https://user-images.githubusercontent.com/21299126/115955030-142f3b00-a4a9-11eb-
 
 The following vim-related helper functions are included:
 
-| File                                | Usage                  | Description                                             |
-| ----------------------------------- | ---------------------- | ------------------------------------------------------- |
-| [`vim-help`](/functions/vim-help)   | `vim-help <helptag>..` | Open the vim help tag (like running `:h <tag>`) in vim. |
-| [`_vim_help`](/functions/_vim_help) |                        | Provides completions for the other vim functions        |
+| File                                | Usage                   | Description                                                   |
+| ----------------------------------- | ----------------------- | ------------------------------------------------------------- |
+| [`nvim-help`](/functions/nvim-help) | `nvim-help <helptag>..` | Open the neovim help tag (like running `:h <tag>`) in neovim. |
+| [`vim-help`](/functions/vim-help)   | `vim-help <helptag>..`  | Open the vim help tag (like running `:h <tag>`) in vim.       |
+| [`_vim_help`](/functions/_vim_help) |                         | Provides completions for the other vim functions              |
 
 The [`vim-help`](/functions/vim-help) and [`nvim-help`](/functions/nvim-help)
 zsh functions launch {,neo}vim directly from the shell into the help view for
