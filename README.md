@@ -90,10 +90,22 @@ Clone the repository:
 $ git clone git://github.com/b0o/zsh-extras.git
 ```
 
-Include the directory in your `$fpath`, for example by adding in `zshrc`:
+Then, either source the `zsh-extras.plugin.zsh` in your `zshrc`:
+
+```
+source "path/to/zsh-extras/zsh-extras.plugin.zsh"
+```
+
+Or, include the `functions` directory in your `$fpath` and autoload the
+non-completion functions:
 
 ```zsh
 fpath+=("path/to/zsh-extras/functions")
+
+# Autoload non-completion functions
+for f in path/to/zsh-extras/functions/[^_]*
+  autoload -Uz "$(basename "$f")"
+done
 ```
 
 You may have to force rebuild `zcompdump`:
