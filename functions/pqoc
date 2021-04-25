@@ -2,7 +2,7 @@
 
 # query package that owns a given command
 function pqoc() {
-  local p
+  local p c
   for c in "$@"; do
     p="$(command -v "$c")" || {
       echo "error: not found in path: $c" >&2

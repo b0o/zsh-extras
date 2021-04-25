@@ -19,6 +19,7 @@ _vim-help() {
   esac
 
   local -a tagfiles=()
+  local d
   while read -r d; do
     local t="$d/doc/tags"
     if [[ -f "$t" ]]; then
