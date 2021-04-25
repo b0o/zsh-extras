@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
+# Author:  Maddison Hellstrom <github.com/b0o>
+# Repo:    https://github.com/b0o/zsh-extras
+# License: MIT
 
 # usage: pqlmg pat package [package ..]
 # search manual pages owned by package for pat

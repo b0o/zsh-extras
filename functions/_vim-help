@@ -1,6 +1,7 @@
 #compdef vim-help nvim-help
-# Author: Maddison Hellstrom <github.com/b0o>
-# License: MIT License
+# Author:  Maddison Hellstrom <github.com/b0o>
+# Repo:    https://github.com/b0o/zsh-extras
+# License: MIT
 
 _vim-help() {
   local filter="${1:-}"

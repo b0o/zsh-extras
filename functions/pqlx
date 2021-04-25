@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
+# Author:  Maddison Hellstrom <github.com/b0o>
+# Repo:    https://github.com/b0o/zsh-extras
+# License: MIT
 
 # list executable files owned by package
 function pqlx() {
