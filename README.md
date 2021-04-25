@@ -31,8 +31,62 @@ alias vh=nvim-help
 
 ## Installation
 
-To install, place the desired scripts inside a directory in your `fpath`, for example `/usr/share/zsh/site-functions/`.
-See [zshall(1) FUNCTIONS](https://man.archlinux.org/man/zshall.1#AUTOLOADING_FUNCTIONS) for more information.
+### antigen
+
+```zsh
+antigen bundle 'b0o/zsh-extras'
+```
+
+### zinit
+
+```zsh
+zinit ice wait'0b' lucid # Optional: enable lazy loading
+zinit light 'b0o/zsh-extras'
+```
+
+### zplug
+
+```zsh
+zplug 'b0o/zsh-extras'
+```
+
+#### oh-my-zsh
+
+Clone the repository inside your oh-my-zsh repo:
+
+```
+$ git clone https://github.com/b0o/zsh-extras "${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-extras"
+```
+
+Enable it in your `zshrc` by adding it to your plugin list and reloading the completion:
+
+```zsh
+plugins=(… 'zsh-extras')
+autoload -U compinit && compinit
+```
+
+### Manual installation
+
+Clone the repository:
+
+```
+$ git clone git://github.com/b0o/zsh-extras.git
+```
+
+Include the directory in your `$fpath`, for example by adding in `zshrc`:
+
+```zsh
+fpath=('path/to/zsh-extras/functions' "${fpath[@]}")
+```
+
+You may have to force rebuild `zcompdump`:
+
+```
+$ rm -f ~/.zcompdump; compinit
+```
+
+If you only want to install a subset of scripts, please note that some scripts
+depend on others.
 
 ## License
 
