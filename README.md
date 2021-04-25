@@ -47,20 +47,20 @@ alias vh=nvim-help
 
 ## Installation
 
-### antigen
+#### antigen
 
 ```zsh
 antigen bundle 'b0o/zsh-extras'
 ```
 
-### zinit
+#### zinit
 
 ```zsh
 zinit ice wait'0b' lucid # Optional: enable lazy loading
 zinit light 'b0o/zsh-extras'
 ```
 
-### zplug
+#### zplug
 
 ```zsh
 zplug 'b0o/zsh-extras'
@@ -81,7 +81,7 @@ plugins=(… 'zsh-extras')
 autoload -U compinit && compinit
 ```
 
-### Manual installation
+#### Manual installation
 
 Clone the repository:
 
