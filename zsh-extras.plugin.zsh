@@ -23,4 +23,5 @@ autoload -Uz \
   "pqlmg" \
   "pqlx" \
   "pqoc" \
+  "putfn" \
   "vim-help"

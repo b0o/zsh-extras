@@ -4,9 +4,11 @@
 
 The following general helper functions are included:
 
-| File                  | Usage      | Mnemonic           | Description                                                                                                       |
-| --------------------- | ---------- | ------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [`mg`](/functions/mg) | `mg <pat>` | _**m**an **g**rep_ | Search inside of all manpages found in your `MANPATH` (requires [ripgrep](https://github.com/BurntSushi/ripgrep)) |
+| File                          | Usage                 | Mnemonic                   | Description                                                                                                       |
+| ----------------------------- | --------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`mg`](/functions/mg)         | `mg <pat>`            | _**m**an **g**rep_         | Search inside of all manpages found in your `MANPATH` (requires [ripgrep](https://github.com/BurntSushi/ripgrep)) |
+| [`putfn`](/functions/putfn)   | `putfn <func> <dest>` | _**put** **f**u**n**ction_ | Puts the source of `<func>` into the file `<dest>`. Useful for quickly saving interactively-defined functions     |
+| [`_putfn`](/functions/_putfn) |                       |                            | Provides completions for the putfn function                                                                       |
 
 ## pacman
 

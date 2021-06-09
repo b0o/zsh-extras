@@ -1,0 +1,137 @@
+#!/usr/bin/env zsh
+
+function putfn() {
+  local usage="usage: putfn [-h] [-faSX] [-i INTERPRETER] FUNC [DEST]"
+  local help="
+  -h              display usage information
+  -f              force overwrite DEST
+  -a              append to DEST (implies -S)
+  -i INTERPRETER  specify interpreter (ignored with -a)
+  -S              no shebang
+  -X              don't chmod +x DEST
+
+  putfn is a quick way to save interactively-defined zshell functions to a file.
+  It puts the source of FUNC into the file DEST and makes it executable.
+
+  If DEST is a directory, the function will be placed at DEST/{function name}.
+  A DEST of - indicates STDOUT.
+
+  If a file exists at DEST, it will not be overwritten unless -f is specified.
+  Alternatively, if -a is specified, the file will be appended to.
+
+  If no DEST is specified, either the value of the environment variable
+  ZFUNCDEST. If ZFUNCDEST is used, the -a and -S options are implied. This
+  makes ZFUNCDEST=\"\$HOME/.zshrc\" useful if you want functions to be appended
+  to your zshrc file.
+
+  If niether DEST nor ZFUNCDEST is defined, ZDOTDIR/functions/ will be used as
+  long as it's a directory.
+"
+
+  local -i verbose=0
+  local -i force=0
+  local -i append=0
+  local -i shebang=1
+  local -i chmod=1
+  local interpreter="/usr/bin/env zsh"
+
+  local opt OPTARG
+  local -i OPTIND
+  while getopts "hfai:SX" opt "$@"; do
+    case "$opt" in
+    h)
+      echo -e "$usage\n$help"
+      return 0
+      ;;
+    f)
+      force=1
+      ;;
+    a)
+      append=1
+      shebang=0
+      ;;
+    i)
+      interpreter="$OPTARG"
+      ;;
+    S)
+      shebang=0
+      ;;
+    X)
+      chmod=0
+      ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  if [[ $# -eq 0 || $# -gt 2 ]]; then
+    echo -e "$usage"
+    return 1
+  fi
+
+  local fn="$1"
+  local dest="${2:-}"
+
+  if [[ -z "$dest" ]]; then
+    if ! [[ -v ZFUNCDEST || ZDOTDIR ]]; then
+      echo "$usage" >&2
+      return 1
+    fi
+
+    if [[ -v ZFUNCDEST ]]; then
+      dest="$ZFUNCDEST"
+      append=1
+      shebang=0
+
+    else
+      dest="${ZDOTDIR}/functions"
+      if [[ ! -d "$dest" ]]; then
+        echo "$usage" >&2
+        return 1
+      fi
+    fi
+  fi
+
+  local fn_def
+  fn_def="$(declare -f -- "$fn")" || {
+    echo "putfn: not a function: $fn" >&2
+    return 1
+  }
+
+  local fn_name="${fn_def/ */}"
+
+  if [[ "$dest" != "-" ]]; then
+    if [[ -d "$dest" ]]; then
+      dest="$dest/$fn_name"
+    fi
+
+    if [[ $append -eq 0 && $force -eq 0 && -e "$dest" ]]; then
+      echo "putfn: DEST exists (use -f to force overwrite): $dest" >&2
+      return 1
+    fi
+
+    dest="$(realpath -m "$dest")" || return
+  fi
+
+  {
+    if [[ $shebang -eq 1 ]]; then
+      echo "#!$interpreter"
+      echo
+    fi
+    echo "$fn_def"
+  } | {
+    if [[ "$dest" == "-" ]]; then
+      cat
+      return 0
+    elif [[ $append -eq 1 ]]; then
+      cat >> "$dest" || return
+      echo "Appended to $dest" >&2
+    else
+      cat > "$dest" || return
+      echo "Written to $dest" >&2
+    fi
+  }
+
+  if [[ $chmod -eq 1 ]]; then
+    chmod +x "$dest"
+  fi
+}

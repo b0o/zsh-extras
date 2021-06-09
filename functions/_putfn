@@ -1,0 +1,25 @@
+#compdef putfn
+# Author:  Maddison Hellstrom <github.com/b0o>
+# Repo:    https://github.com/b0o/zsh-extras
+# License: MIT
+
+_putfn() {
+  local -a args
+  args=(
+    '-f[force overwrite DEST]'
+    '-a[append to DEST (implies -S)]'
+    '-i[specify interpreter (ignored with -a)]:interpreter:_files'
+    '-S[no shebang]'
+    '-X[don'"'"'t chmod +x DEST]'
+    '-h[display usage information]'
+  )
+  if [[ $CURRENT -gt 2 || ! "${words[2]:-}" =~ ^- ]]; then
+    args+=(
+      '1:function:_functions'
+      '2:destination:_files'
+    )
+  fi
+  _arguments -S -s "${args[@]}"
+}
+
+# vim:set ft=zsh:
