@@ -1,14 +1,14 @@
 #!/usr/bin/env zsh
 
 function putfn() {
-  local usage="usage: putfn [-h] [-faSX] [-i INTERPRETER] FUNC [DEST]"
+  local usage="usage: putfn [-h] [-faSx] [-i INTERPRETER] FUNC [DEST]"
   local help="
   -h              display usage information
   -f              force overwrite DEST
   -a              append to DEST (implies -S)
   -i INTERPRETER  specify interpreter (ignored with -a)
   -S              no shebang
-  -X              don't chmod +x DEST
+  -x              make DEST executable
 
   putfn is a quick way to save interactively-defined zshell functions to a file.
   It puts the source of FUNC into the file DEST and makes it executable.
@@ -32,12 +32,12 @@ function putfn() {
   local -i force=0
   local -i append=0
   local -i shebang=1
-  local -i chmod=1
+  local -i chmod=0
   local interpreter="/usr/bin/env zsh"
 
   local opt OPTARG
   local -i OPTIND
-  while getopts "hfai:SX" opt "$@"; do
+  while getopts "hfai:Sx" opt "$@"; do
     case "$opt" in
     h)
       echo -e "$usage\n$help"
@@ -56,8 +56,8 @@ function putfn() {
     S)
       shebang=0
       ;;
-    X)
-      chmod=0
+    x)
+      chmod=1
       ;;
     esac
   done
