@@ -71,6 +71,10 @@ function putfn() {
   local fn="$1"
   local dest="${2:-}"
 
+  if [[ -z "$dest" && ! -t 1 ]]; then
+    dest="-"
+  fi
+
   if [[ -z "$dest" ]]; then
     if ! [[ -v ZFUNCDEST || ZDOTDIR ]]; then
       echo "$usage" >&2
